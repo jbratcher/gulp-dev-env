@@ -18,7 +18,7 @@ gulp.task('build:dist', function() {
         .pipe(gulp.dest("dist"));
 });
 
-// Clean Dist foler
+// Clean Dist folder
 
 gulp.task('clean:dist', function() {
   return del.sync('dist');
