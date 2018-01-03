@@ -1,10 +1,10 @@
 # Gulp Live Reload Dev Environment
 
-Live Reload via Gulp for SASS, JS, and server via browser sync
+Live Reload via Gulp for SASS
 
 ### Version
 
-1.0.2
+1.0.3
 
 ## Install Dependencies
 
@@ -14,7 +14,7 @@ npm install
 
 ## Compile Sass & Run Dev Server
 
-1 word: gulp
+gulp
 
 ```bash
 gulp
@@ -25,14 +25,32 @@ OR
 npm start
 ```
 
+## Bundle and minify compiled CSS and JS
+
+```bash
+gulp useref
+```
+
 ## Bulid to dist from src
 
 ```bash
 gulp build
 ```
+## Clean (delete) dist
 
-Files are compiled into /src folder
+```bash
+gulp clean:dist
+```
 
-Sass compiles in to CSS
-JS and Font Awesome icons are loaded
-Server is started and refreshes on save
+## Features: 
+
+* Sass compiles in to CSS 
+* JS and CSS are bundled and minified
+* Images are optimized and cached
+* Font Awesome icons are loaded
+* Server is started and refreshes on save
+
+
+## Future Features:
+
+* Complile ES6 to ES5

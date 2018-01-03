@@ -83,7 +83,7 @@ gulp.task('clean:dist', function() {
 
 // Gulp default tasks
 
-gulp.task('default', ['useref', 'browserSync', 'sass', 'fonts', 'fa', 'img']);
+gulp.task('default', ['browserSync', 'sass', 'fonts', 'fa', 'img']);
 
-gulp.task('build', ['clean:dist', 'build:dist', 'useref', 'browserSync', 'sass', 'fonts', 'fa', 'img']);
+gulp.task('build', ['clean:dist', 'build:dist', 'useref', 'sass', 'fonts', 'fa', 'img']);
 
