@@ -11,65 +11,6 @@ const cache         = require('gulp-cache');
 const del           = require('del');
 const browserSync   = require('browser-sync').create();
 
-// Build dist from src
-
-gulp.task('build:dist', function() {
-    return gulp.src(["src/**"])
-        .pipe(gulp.dest("dist"));
-});
-
-// Clean Dist folder
-
-gulp.task('clean:dist', function() {
-  return del.sync('dist');
-});
-
-// Build JS, CSS and minify
-
-gulp.task('useref', function(){
-  return gulp.src('src/*.html')
-    .pipe(useref())
-    .pipe(gulp.dest('dist'))
-    .pipe(gulpIf('*.js', uglify()))
-    .pipe(gulp.dest('dist'))
-    .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'));
-});
-
-// Optimize Images and cache
-
-gulp.task('img', function(){
-  return gulp.src('src/img/*.+(png|jpg|jpeg|gif|svg)')
-    .pipe(cache(imagemin({
-          interlaced: true
-        })))
-  .pipe(gulp.dest('dist/images'));
-});
-
-
-// Compile Sass & Inject Into Browser
-
-gulp.task('sass', function() {
-    return gulp.src(['src/scss/*.scss'])
-        .pipe(sass())
-        .pipe(gulp.dest("src/css"))
-        .pipe(browserSync.stream());
-});
-
-// Watch Sass, JS && Serve
-
-gulp.task('serve', ['sass'], function() {
-
-    browserSync.init({
-        server: "./src",
-        port: 8082     // Change port as needed, 8082 is for Cloud 9 workspace
-    });
-
-    gulp.watch(['src/scss/*.scss'], ['sass']);
-    gulp.watch("src/*.html").on('change', browserSync.reload);
-    gulp.watch("src/js/*.js").on('change', browserSync.reload);
-});
-
 // Move Static Files from node modules to src folders
 
 // Move Fonts to src/fonts
@@ -86,9 +27,63 @@ gulp.task('fa', function() {
     .pipe(gulp.dest('src/css'));
 });
 
+// Compile Sass & Inject Into Browser
+
+gulp.task('sass', function() {
+    return gulp.src(['src/scss/*.scss'])
+        .pipe(sass())
+        .pipe(gulp.dest("src/css"))
+        .pipe(browserSync.stream());
+});
+
+// Optimize Images and cache
+
+gulp.task('img', function(){
+  return gulp.src('src/img/*.+(png|jpg|jpeg|gif|svg)')
+    .pipe(cache(imagemin({
+          interlaced: true
+        })))
+  .pipe(gulp.dest('dist/images'));
+});
+
+// Serve
+
+gulp.task('browserSync', ['sass'], function() {
+  browserSync.init({
+      server: "./src",
+      port: 8082     // Change port as needed, 8082 is for Cloud 9 workspace
+  });
+  gulp.watch(['src/scss/*.scss'], ['sass']);
+  gulp.watch("src/*.html").on('change', browserSync.reload);
+  gulp.watch("src/js/*.js").on('change', browserSync.reload);
+});
+
+// Bundle JS and CSS and minify
+
+gulp.task('useref', function(){
+  return gulp.src('src/*.html')
+    .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
+    .pipe(gulpIf('*.css', cssnano()))
+    .pipe(gulp.dest('dist'));
+});
+
+// Build dist from src
+
+gulp.task('build:dist', function() {
+    return gulp.src(["src/**"])
+        .pipe(gulp.dest("dist"));
+});
+
+// Clean Dist folder
+
+gulp.task('clean:dist', function() {
+  return del.sync('dist');
+});
+
 // Gulp default tasks
 
-gulp.task('default', ['useref', 'serve', 'sass', 'fonts', 'fa', 'img']);
+gulp.task('default', ['useref', 'browserSync', 'sass', 'fonts', 'fa', 'img']);
 
-gulp.task('build', ['clean:dist', 'build:dist', 'useref', 'serve', 'sass', 'fonts', 'fa', 'img']);
+gulp.task('build', ['clean:dist', 'build:dist', 'useref', 'browserSync', 'sass', 'fonts', 'fa', 'img']);
 
