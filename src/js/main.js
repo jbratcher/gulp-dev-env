@@ -7,3 +7,7 @@ function stuff() {
 }
 
 stuff();
+
+var funcName = (params) => params + 2;
+
+funcName(2);

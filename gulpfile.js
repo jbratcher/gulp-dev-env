@@ -10,8 +10,9 @@ const gulpIf        = require('gulp-if');
 const cssnano       = require('gulp-cssnano');
 const imagemin      = require('gulp-imagemin');
 const cache         = require('gulp-cache');
+const autoprefixer  = require('gulp-autoprefixer');
+const babel         = require('gulp-babel');
 const del           = require('del');
-const autoprefixer = require('gulp-autoprefixer');
 
 // Move vendor files from node modules to src folders
 
@@ -49,6 +50,16 @@ gulp.task('autoprefix', function() {
         .pipe(gulp.dest('dist/css'));
 });
 
+// Compile ES6 to ES5 with Babel
+
+gulp.task('compilejs', function() {
+    return gulp.src('src/js/*.js')
+        .pipe(babel({
+            presets: ['env']
+        }))
+        .pipe(gulp.dest('dist'));
+});
+
 // Optimize Images and cache (Watched)
 
 gulp.task('img', function(){
@@ -78,7 +89,6 @@ gulp.task('browserSync', ['sass'], function() {
 gulp.task('useref', function() {
   return gulp.src('src/*.html')
     .pipe(useref())
-    .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'));
 });
@@ -98,7 +108,7 @@ gulp.task('clean:dist', function() {
 
 // Gulp default tasks
 
-gulp.task('default', ['browserSync', 'sass', 'fonts', 'fa', 'img', 'autoprefix']);
+gulp.task('default', ['browserSync', 'useref', 'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs']);
 
-gulp.task('build', ['clean:dist', 'build:dist', 'useref', 'sass', 'fonts', 'fa', 'img', 'autoprefix']);
+gulp.task('build', ['clean:dist', 'build:dist', 'useref', 'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs']);
 

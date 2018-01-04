@@ -1,3 +1,5 @@
+"use strict";
+
 // Main.js file for custom JS
 
 console.log("now");
@@ -8,6 +10,8 @@ function stuff() {
 
 stuff();
 
-var funcName = (params) => params + 2;
+var funcName = function funcName(params) {
+    return params + 2;
+};
 
 funcName(2);

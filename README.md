@@ -4,7 +4,7 @@ Live Reload via Gulp for SASS
 
 ### Version
 
-1.0.3
+1.0.4
 
 ## Install Dependencies
 
@@ -49,9 +49,17 @@ gulp clean:dist
 * Images are optimized and cached
 * Font Awesome icons are loaded
 * Server is started and refreshes on save
+* Autoprefix CSS
 * Complile ES6 to ES5
 
 
 ## Future Features:
 
-* Autoprefix CSS
+* ???
+
+
+#### Change Log
+
+###### 1.0.4
+
+* Removed jsuglify to use babel complier, will work on fix
