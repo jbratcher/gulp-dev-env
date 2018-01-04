@@ -49,8 +49,9 @@ gulp clean:dist
 * Images are optimized and cached
 * Font Awesome icons are loaded
 * Server is started and refreshes on save
+* Complile ES6 to ES5
 
 
 ## Future Features:
 
-* Complile ES6 to ES5
+* Autoprefix CSS
