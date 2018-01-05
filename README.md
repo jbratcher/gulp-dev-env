@@ -4,7 +4,7 @@ Live Reload via Gulp for SASS
 
 ### Version
 
-1.0.4
+1.0.5
 
 ## Install Dependencies
 
@@ -59,6 +59,10 @@ gulp clean:dist
 
 
 #### Change Log
+
+###### 1.0.5
+
+* Upgraded to Gulp v4
 
 ###### 1.0.4
 

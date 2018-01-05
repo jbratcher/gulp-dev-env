@@ -57,7 +57,7 @@ gulp.task('compilejs', function() {
         .pipe(babel({
             presets: ['env']
         }))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist/js'));
 });
 
 // Optimize Images and cache (Watched)
@@ -74,15 +74,15 @@ gulp.task('img', function(){
 
 // Serve and Watch src files
 
-gulp.task('browserSync', ['sass'], function() {
+gulp.task('browserSync', gulp.series('sass', function() {
   browserSync.init({
       server: "./src",
       port: 8082     // Change port as needed, 8082 is for Cloud 9 workspace
   });
-  gulp.watch(['src/scss/*.scss'], ['sass']);
+  gulp.watch('src/scss/*.scss', gulp.parallel('sass'));
   gulp.watch("src/*.html").on('change', browserSync.reload);
   gulp.watch("src/js/*.js").on('change', browserSync.reload);
-});
+}));
 
 // Bundle JS and CSS and minify then move to dist
 
@@ -103,12 +103,11 @@ gulp.task('build:dist', function() {
 // Clean Dist folder
 
 gulp.task('clean:dist', function() {
-  return del.sync('dist');
+  return del('dist');
 });
 
 // Gulp default tasks
 
-gulp.task('default', ['browserSync', 'useref', 'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs']);
+gulp.task('default', gulp.series('browserSync', 'sass', 'fonts', 'fa', 'img'));
 
-gulp.task('build', ['clean:dist', 'build:dist', 'useref', 'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs']);
-
+gulp.task('build', gulp.series('clean:dist', 'build:dist',  'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs', 'useref'));
