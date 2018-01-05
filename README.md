@@ -55,7 +55,12 @@ gulp clean:dist
 
 ## Future Features:
 
-* ???
+* Fix bugs in min files
+* Refactor for ES6 JS
+
+## Known "bugs"
+
+* CSS and JS are minified but not prefixed or complied.  Unminified versions are working as intended.
 
 
 #### Change Log

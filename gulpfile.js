@@ -18,57 +18,57 @@ const del           = require('del');
 
 // Move Fonts (font awesome) to src/fonts
 
-gulp.task('fonts', function() {
-  return gulp.src('node_modules/font-awesome/fonts/*')
-    .pipe(gulp.dest('src/fonts'));
-});
+gulp.task('fonts', () =>
+  gulp.src('node_modules/font-awesome/fonts/*')
+    .pipe(gulp.dest('src/fonts'))
+);
 
 // Move Font Awesome Icons CSS to src/css/vendor
 
-gulp.task('fa', function() {
-  return gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
-    .pipe(gulp.dest('src/css/vendor'));
-});
+gulp.task('fa', () =>
+  gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
+    .pipe(gulp.dest('src/css/vendor'))
+);
 
 // Compile Sass & Inject Into Browser (Watched)
 
-gulp.task('sass', function() {
-  return gulp.src(['src/scss/*.scss'])
+gulp.task('sass', () =>
+  gulp.src(['src/scss/*.scss'])
       .pipe(sass())
       .pipe(gulp.dest("src/css"))
-      .pipe(browserSync.stream());
-});
+      .pipe(browserSync.stream())
+);
 
 // Add vendor prefixes to src CSS and move to dist
 
-gulp.task('autoprefix', function() {
-    return gulp.src(['src/css/*.css'])
+gulp.task('autoprefix', () =>
+    gulp.src(['src/css/*.css'])
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
         }))
-        .pipe(gulp.dest('dist/css'));
-});
+        .pipe(gulp.dest('dist/css'))
+);
 
 // Compile ES6 to ES5 with Babel
 
-gulp.task('compilejs', function() {
-    return gulp.src('src/js/*.js')
+gulp.task('compilejs', () =>
+    gulp.src('src/js/*.js')
         .pipe(babel({
             presets: ['env']
         }))
-        .pipe(gulp.dest('dist/js'));
-});
+        .pipe(gulp.dest('dist/js'))
+);
 
 // Optimize Images and cache (Watched)
 
-gulp.task('img', function(){
-  return gulp.src('src/img/*.+(png|jpg|jpeg|gif|svg)')
+gulp.task('img', () =>
+  gulp.src('src/img/*.+(png|jpg|jpeg|gif|svg)')
     .pipe(cache(imagemin({
           interlaced: true
         })))
-  .pipe(gulp.dest('dist/images'));
-});
+  .pipe(gulp.dest('dist/images'))
+);
 
 // Live Reload function
 
@@ -86,25 +86,25 @@ gulp.task('browserSync', gulp.series('sass', function() {
 
 // Bundle JS and CSS and minify then move to dist
 
-gulp.task('useref', function() {
-  return gulp.src('src/*.html')
+gulp.task('useref', () =>
+  gulp.src('src/*.html')
     .pipe(useref())
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'));
-});
+    .pipe(gulp.dest('dist'))
+);
 
 // Move src files to dist
 
-gulp.task('build:dist', function() {
-    return gulp.src(["src/**"])
-        .pipe(gulp.dest("dist"));
-});
+gulp.task('build:dist', () =>
+    gulp.src(["src/**"])
+        .pipe(gulp.dest("dist"))
+);
 
 // Clean Dist folder
 
-gulp.task('clean:dist', function() {
-  return del('dist');
-});
+gulp.task('clean:dist', () =>
+  del('dist')
+);
 
 // Gulp default tasks
 
