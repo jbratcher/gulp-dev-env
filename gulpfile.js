@@ -33,7 +33,7 @@ gulp.task('fa', () =>
 // Compile Sass & Inject Into Browser (Watched)
 
 gulp.task('sass', () =>
-  gulp.src(['src/scss/*.scss'])
+  gulp.src('src/scss/*.scss')
       .pipe(sass())
       .pipe(gulp.dest("src/css"))
       .pipe(browserSync.stream())
@@ -42,7 +42,7 @@ gulp.task('sass', () =>
 // Add vendor prefixes to src CSS and move to dist
 
 gulp.task('autoprefix', () =>
-    gulp.src(['src/css/*.css'])
+    gulp.src('src/css/*.css')
         .pipe(autoprefixer({
             browsers: ['last 2 versions'],
             cascade: false
@@ -72,23 +72,29 @@ gulp.task('img', () =>
 
 // Live Reload function
 
+// Watchers
+
+gulp.task('watch', () => 
+  gulp.watch("src/scss/*.scss").on('change', browserSync.reload),
+  gulp.watch("src/css/*.css").on('change', browserSync.reload),
+  gulp.watch("src/*.html").on('change', browserSync.reload),
+  gulp.watch("src/js/*.js").on('change', browserSync.reload)  
+);
+
 // Serve and Watch src files
 
-gulp.task('browserSync', gulp.series('sass', function() {
+gulp.task('browserSync', gulp.parallel('sass', 'watch', () =>
   browserSync.init({
       server: "./src",
       port: 8082     // Change port as needed, 8082 is for Cloud 9 workspace
-  });
-  gulp.watch('src/scss/*.scss', gulp.parallel('sass'));
-  gulp.watch("src/*.html").on('change', browserSync.reload);
-  gulp.watch("src/js/*.js").on('change', browserSync.reload);
-}));
+})));
 
-// Bundle JS and CSS and minify then move to dist
+// Bundle JS and CSS and minify
 
 gulp.task('useref', () =>
-  gulp.src('src/*.html')
+  gulp.src('dist/*.html')
     .pipe(useref())
+    .pipe(gulpIf('*.js', uglify()))
     .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist'))
 );
@@ -108,6 +114,6 @@ gulp.task('clean:dist', () =>
 
 // Gulp default tasks
 
-gulp.task('default', gulp.series('browserSync', 'sass', 'fonts', 'fa', 'img'));
+gulp.task('default', gulp.parallel('sass', 'fonts', 'fa', 'img', 'browserSync', 'watch'));
 
 gulp.task('build', gulp.series('clean:dist', 'build:dist',  'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs', 'useref'));

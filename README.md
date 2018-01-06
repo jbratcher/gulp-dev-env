@@ -51,19 +51,24 @@ gulp clean:dist
 * Server is started and refreshes on save
 * Autoprefix CSS
 * Complile ES6 to ES5
+* Written in ES6
 
 
 ## Future Features:
 
 * Fix bugs in min files
-* Refactor for ES6 JS
+
 
 ## Known "bugs"
 
-* CSS and JS are minified but not prefixed or complied.  Unminified versions are working as intended.
+* JS is complied and bundled but not uglified (minified)
 
 
 #### Change Log
+
+###### 1.0.6
+
+* Converted to ES6, fixed CSS bug with prefix in minified file
 
 ###### 1.0.5
 

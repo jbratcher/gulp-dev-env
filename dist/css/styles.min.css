@@ -1,1 +1,1 @@
-body{background:teal}a{filter:drop-shadow(16px 16px 20px red) invert(75%)}div{display:grid}
+body{background:blue}a{-webkit-filter:drop-shadow(16px 16px 20px red) invert(75%);filter:drop-shadow(16px 16px 20px red) invert(75%)}div{display:grid}
