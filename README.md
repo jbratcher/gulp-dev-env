@@ -4,7 +4,7 @@ Live Reload via Gulp for SASS
 
 ### Version
 
-1.0.5
+1.0.6
 
 ## Install Dependencies
 
@@ -56,19 +56,20 @@ gulp clean:dist
 
 ## Future Features:
 
-* Fix bugs in min files
+* Cleaner workflow
+* Webpack
 
 
 ## Known "bugs"
 
-* JS is complied and bundled but not uglified (minified)
+* ???
 
 
 #### Change Log
 
 ###### 1.0.6
 
-* Converted to ES6, fixed CSS bug with prefix in minified file
+* Converted to ES6, fixed JS, CSS bug with minified files
 
 ###### 1.0.5
 

@@ -2,6 +2,7 @@
 // Gulp, BrowserSync, SASS, useref with gulpif to bundle and minify CSS adn JS, CSS autoprefixer, Imagemin to optimize images, cache to reduce reload, del to remove(clean) the dist directory
 
 const gulp          = require('gulp');
+const pump          = require('pump');
 const browserSync   = require('browser-sync').create();
 const sass          = require('gulp-sass');
 const useref        = require('gulp-useref');
@@ -89,7 +90,7 @@ gulp.task('browserSync', gulp.parallel('sass', 'watch', () =>
       port: 8082     // Change port as needed, 8082 is for Cloud 9 workspace
 })));
 
-// Bundle JS and CSS and minify
+// Bundle JSS,CSS and minify
 
 gulp.task('useref', () =>
   gulp.src('dist/*.html')
@@ -116,4 +117,4 @@ gulp.task('clean:dist', () =>
 
 gulp.task('default', gulp.parallel('sass', 'fonts', 'fa', 'img', 'browserSync', 'watch'));
 
-gulp.task('build', gulp.series('clean:dist', 'build:dist',  'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs', 'useref'));
+gulp.task('build', gulp.series('clean:dist', 'build:dist', 'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs', 'useref'));
