@@ -25,6 +25,32 @@ OR
 npm start
 ```
 
+## Folder and File Structure
+
+/src
+    /css
+    styles.css
+        /vendor
+        -font-awesome.min.css
+    /fonts
+    -fontawesome-webfont.eot
+    -fontawesome-webfont.svg
+    -fontawesome-webfont.ttf
+    -fontawesome-webfont.wotf
+    -fontawesome-webfont.wotf2
+    -FontAwesome.otf
+    /img
+    /js
+        -index.js
+        -main.js
+    /scss
+    -styles.scss
+-index.html
+-gulpfile.js
+-LICENSE
+-package.json
+-readme.md
+
 ## Bundle and minify compiled CSS and JS
 
 ```bash
@@ -62,7 +88,7 @@ gulp clean:dist
 
 ## Known "bugs"
 
-* ???
+* 'browerSync' task not allowing sass to reload, hotfixed
 
 
 #### Change Log

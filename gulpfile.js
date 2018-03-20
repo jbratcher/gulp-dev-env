@@ -1,23 +1,24 @@
 // Require dependencies
+
 // Gulp, BrowserSync, SASS, useref with gulpif to bundle and minify CSS adn JS, CSS autoprefixer, Imagemin to optimize images, cache to reduce reload, del to remove(clean) the dist directory
 
-const gulp          = require('gulp');
-const pump          = require('pump');
-const browserSync   = require('browser-sync').create();
-const sass          = require('gulp-sass');
-const useref        = require('gulp-useref');
-const uglify        = require('gulp-uglify');
-const gulpIf        = require('gulp-if');
-const cssnano       = require('gulp-cssnano');
-const imagemin      = require('gulp-imagemin');
-const cache         = require('gulp-cache');
-const autoprefixer  = require('gulp-autoprefixer');
-const babel         = require('gulp-babel');
-const del           = require('del');
+const gulp          = require('gulp'); // core dep
+const pump          = require('pump');  // pipes streams together
+const browserSync   = require('browser-sync').create();  // live browser reload
+const sass          = require('gulp-sass');  //  gulp sass compiler
+const useref        = require('gulp-useref');  // replace unmodded files with modded files
+const uglify        = require('gulp-uglify');  // js uglify (minification)
+const gulpIf        = require('gulp-if');  // conditional statements in gulp
+const cssnano       = require('gulp-cssnano');  // css minification
+const imagemin      = require('gulp-imagemin');  // img optimization
+const cache         = require('gulp-cache');  // cache to reduce reload
+const autoprefixer  = require('gulp-autoprefixer');  // autoprefix css
+const babel         = require('gulp-babel');  // compile js to es2015
+const del           = require('del');  // deletes files and folders for cleaining
 
 // Move vendor files from node modules to src folders
 
-// Move Fonts (font awesome) to src/fonts
+// Move Fonts (font awesome) from node_modules to src/fonts
 
 gulp.task('fonts', () =>
   gulp.src('node_modules/font-awesome/fonts/*')
@@ -68,29 +69,24 @@ gulp.task('img', () =>
     .pipe(cache(imagemin({
           interlaced: true
         })))
-  .pipe(gulp.dest('dist/images'))
+    .pipe(gulp.dest('dist/images'))
 );
 
 // Live Reload function
 
-// Watchers
-
-gulp.task('watch', () => 
-  gulp.watch("src/scss/*.scss").on('change', browserSync.reload),
-  gulp.watch("src/css/*.css").on('change', browserSync.reload),
-  gulp.watch("src/*.html").on('change', browserSync.reload),
-  gulp.watch("src/js/*.js").on('change', browserSync.reload)  
-);
-
 // Serve and Watch src files
 
-gulp.task('browserSync', gulp.parallel('sass', 'watch', () =>
+gulp.task('browserSync', gulp.parallel('sass', function() {
   browserSync.init({
       server: "./src",
       port: 8082     // Change port as needed, 8082 is for Cloud 9 workspace
-})));
+}),
+    gulp.watch("src/scss/*.scss", gulp.parallel('sass')),
+    gulp.watch("src/*.html").on('change', browserSync.reload),
+    gulp.watch("src/js/*.js").on('change', browserSync.reload);
+}));
 
-// Bundle JSS,CSS and minify
+// Bundle JS,CSS and minify
 
 gulp.task('useref', () =>
   gulp.src('dist/*.html')
@@ -115,6 +111,6 @@ gulp.task('clean:dist', () =>
 
 // Gulp default tasks
 
-gulp.task('default', gulp.parallel('sass', 'fonts', 'fa', 'img', 'browserSync', 'watch'));
+gulp.task('default', gulp.parallel('sass', 'fonts', 'fa', 'img', 'browserSync'));
 
 gulp.task('build', gulp.series('clean:dist', 'build:dist', 'sass', 'fonts', 'fa', 'img', 'autoprefix', 'compilejs', 'useref'));
