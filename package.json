@@ -9,7 +9,8 @@
   "author": "Jeremy Bratcher",
   "license": "MIT",
   "dependencies": {
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^4.7.0",
+    "gulp": "github:gulpjs/gulp#4.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
