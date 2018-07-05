@@ -1,10 +1,10 @@
 # Gulp Live Reload Dev Environment
 
-Live Reload via Gulp for SASS
+Use Typescript and SASS, complie on file change, live browser reload, build a package
 
 ### Version
 
-1.0.6
+1.0.7
 
 ## Install Dependencies
 
@@ -28,23 +28,25 @@ npm start
 ## Folder and File Structure
 
 /src
-    /css
-    styles.css
-        /vendor
-        -font-awesome.min.css
-    /fonts
-    -fontawesome-webfont.eot
-    -fontawesome-webfont.svg
-    -fontawesome-webfont.ttf
-    -fontawesome-webfont.wotf
-    -fontawesome-webfont.wotf2
-    -FontAwesome.otf
-    /img
-    /js
-        -index.js
-        -main.js
-    /scss
-    -styles.scss
+    /css
+    styles.css
+        /vendor
+        /fonts
+            -fontawesome-webfont.eot
+            -fontawesome-webfont.svg
+            -fontawesome-webfont.ttf
+            -fontawesome-webfont.wotf
+            -fontawesome-webfont.wotf2
+            -FontAwesome.otf
+        -font-awesome.min.css
+    /img
+    /js
+        -index.js
+        -main.js
+    /scss
+    -styles.scss
+    /ts
+      -main.ts
 -index.html
 -gulpfile.js
 -LICENSE
@@ -70,6 +72,7 @@ gulp clean:dist
 
 ## Features: 
 
+* Typescript compiles to Javascript
 * Sass compiles in to CSS 
 * JS and CSS are bundled and minified
 * Images are optimized and cached
@@ -77,21 +80,21 @@ gulp clean:dist
 * Server is started and refreshes on save
 * Autoprefix CSS
 * Complile ES6 to ES5
-* Written in ES6
 
 
 ## Future Features:
 
-* Cleaner workflow
 * Webpack
-
 
 ## Known "bugs"
 
-* 'browerSync' task not allowing sass to reload, hotfixed
-
+* ???
 
 #### Change Log
+
+###### 1.0.7
+
+* Added optional Typescript functionality and complier
 
 ###### 1.0.6
 
