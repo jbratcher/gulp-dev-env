@@ -27,6 +27,7 @@ npm start
 
 ## Folder and File Structure
 
+```
 /src
     /css
     styles.css
@@ -52,6 +53,7 @@ npm start
 -LICENSE
 -package.json
 -readme.md
+```
 
 ## Bundle and minify compiled CSS and JS
 
