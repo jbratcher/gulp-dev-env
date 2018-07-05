@@ -12,6 +12,7 @@ const imagemin      = require('gulp-imagemin');  // img optimization
 const cache         = require('gulp-cache');
 const autoprefixer  = require('gulp-autoprefixer');
 const babel         = require('gulp-babel');  // compile js to es2015
+const ts            = require('gulp-typescript');
 const del           = require('del');
 
 // Move vendor files from node modules to src folders
@@ -34,6 +35,17 @@ gulp.task('sass', () =>
       .pipe(gulp.dest("src/css"))
       .pipe(browserSync.stream())
 );
+
+// Complie typescript
+
+gulp.task("tsc", () => {
+  var tsResult = gulp.src("src/ts/*.ts")
+      .pipe(ts({
+            noImplicitAny: false
+      }));
+  return tsResult.js.pipe(gulp.dest("src/js"));
+});
+
 
 // Add vendor prefixes to src CSS and move to dist
 
@@ -74,8 +86,9 @@ gulp.task('browserSync', gulp.parallel('sass', () => {
       port: 8082     // 8082 is for Cloud 9 workspaces
 }),
     gulp.watch("src/scss/*.scss", gulp.parallel('sass')),
+    gulp.watch("src/ts/*.ts").on('change', browserSync.reload),
     gulp.watch("*.html").on('change', browserSync.reload),
-    gulp.watch("src/js/*.js").on('change', browserSync.reload);
+    gulp.watch("src/js/*.js").on('change', browserSync.reload),
     gulp.watch("src/img/*").on('change', browserSync.reload);
 }));
 
@@ -107,6 +120,6 @@ gulp.task('clean:files', () => del(['dist/css/styles.css', 'dist/css/vendor/', '
 
 // Gulp default tasks
 
-gulp.task('default', gulp.parallel('sass', 'fonts', 'fa', 'img', 'browserSync'));
+gulp.task('default', gulp.parallel('sass', 'tsc', 'fonts', 'fa', 'img', 'browserSync'));
 
-gulp.task('build', gulp.series('clean:dist', 'build:dist', 'sass', 'img', 'autoprefix', 'compilejs', 'useref', 'clean:files'));
+gulp.task('build', gulp.series('clean:dist', 'build:dist', 'sass', 'tsc', 'img', 'autoprefix', 'compilejs', 'useref', 'clean:files'));
