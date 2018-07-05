@@ -86,6 +86,7 @@ gulp.task('browserSync', gulp.parallel('sass', () => {
       port: 8082     // 8082 is for Cloud 9 workspaces
 }),
     gulp.watch("src/scss/*.scss", gulp.parallel('sass')),
+    gulp.watch('src/ts/*.ts', gulp.parallel('tsc')),
     gulp.watch("src/ts/*.ts").on('change', browserSync.reload),
     gulp.watch("*.html").on('change', browserSync.reload),
     gulp.watch("src/js/*.js").on('change', browserSync.reload),
