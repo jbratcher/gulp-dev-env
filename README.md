@@ -12,7 +12,7 @@ Use Typescript and SASS, complie on file change, live browser reload, build a pa
 npm install 
 ```
 
-## Compile Sass & Run Dev Server
+## Start live reload server and compile Typescript, SASS
 
 gulp
 
