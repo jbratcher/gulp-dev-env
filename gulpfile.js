@@ -1,7 +1,6 @@
 // Require dependencies
 
 const gulp          = require('gulp');
-const pump          = require('pump');
 const browserSync   = require('browser-sync').create();
 const sass          = require('gulp-sass');
 const useref        = require('gulp-useref');  // replace unmodded files with modded files
