@@ -1,6 +1,6 @@
 # Gulp Live Reload Dev Environment
 
-Use Typescript and SASS, complie on file change, live browser reload, build a package
+Use Typescript and SASS, compile on file change, live browser reload, build a package
 
 ### Version
 
@@ -9,7 +9,7 @@ Use Typescript and SASS, complie on file change, live browser reload, build a pa
 ## Install Dependencies
 
 ```bash
-npm install 
+npm install
 ```
 
 ## Start live reload server and compile Typescript, SASS
@@ -72,10 +72,10 @@ gulp build
 gulp clean:dist
 ```
 
-## Features: 
+## Features:
 
 * Typescript compiles to Javascript
-* Sass compiles in to CSS 
+* Sass compiles in to CSS
 * JS and CSS are bundled and minified
 * Images are optimized and cached
 * Font Awesome icons are loaded

@@ -9,8 +9,7 @@
   "author": "Jeremy Bratcher",
   "license": "MIT",
   "dependencies": {
-    "font-awesome": "^4.7.0",
-    "gulp": "github:gulpjs/gulp#4.0"
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -24,9 +23,10 @@
     "gulp-cssnano": "^2.1.2 ",
     "gulp-imagemin": "^4.0.0",
     "gulp-sass": "^3.1.0",
+    "gulp-typescript": "^5.0.0-alpha.3",
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^3.1.3",
-    "pump": "^2.0.0"
+    "typescript": "^2.9.2"
   },
   "optionalDependencies": {}
 }
