@@ -1,8 +1,6 @@
 body {
-  background: pink; }
+  background: #eee;
+  background: radial-gradient(circle at top left, #eee, #999); }
 
-a {
+h2 {
   filter: drop-shadow(16px 16px 20px red) invert(75%); }
-
-div {
-  display: grid; }
