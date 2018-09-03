@@ -7,7 +7,7 @@ const useref        = require('gulp-useref');  // replace unmodded files with mo
 const uglify        = require('gulp-uglify');  // js concat and minify
 const gulpIf        = require('gulp-if');  // conditional statements
 const cssnano       = require('gulp-cssnano');  // css minification
-const imagemin      = require('gulp-imagemin');  // img optimization
+const image         = require('gulp-image');
 const cache         = require('gulp-cache');
 const autoprefixer  = require('gulp-autoprefixer');
 const babel         = require('gulp-babel');  // compile js to es2015
@@ -70,11 +70,20 @@ gulp.task('compilejs', () =>
 // Optimize images and cache (watched)
 
 gulp.task('img', () =>
-  gulp.src('src/img/*.+(png|jpg|jpeg|gif|svg)')
-    .pipe(cache(imagemin({
-          interlaced: true
-        })))
-    .pipe(gulp.dest('dist/img'))
+  gulp.src('./src/img/*')
+    .pipe(image({
+      pngquant: true,
+      optipng: false,
+      zopflipng: true,
+      jpegRecompress: false,
+      mozjpeg: true,
+      guetzli: false,
+      gifsicle: true,
+      svgo: true,
+      concurrent: 10,
+      quiet: true // defaults to false
+    }))
+    .pipe(gulp.dest('./dest'))
 );
 
 // Live Reload function
